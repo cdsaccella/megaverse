@@ -4,18 +4,18 @@ import { Space } from '../../models/space'
 import { IAstralObjectService } from './astralobject.service'
 
 export class SpaceService implements IAstralObjectService {
-  getKind(): AstralObjectEnum {
+  getKind (): AstralObjectEnum {
     return AstralObjectEnum.Space
   }
 
-  parse(row: number, column: number, value: string): IAstralObject | undefined {
+  parse (row: number, column: number, value: string): IAstralObject | undefined {
     if (value === 'SPACE') {
       return new Space(row, column)
     }
     return undefined
   }
 
-  validate(_: IAstralObject): boolean {
+  validate (_: IAstralObject): boolean {
     return true
   }
 }

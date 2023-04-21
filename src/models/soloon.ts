@@ -6,11 +6,21 @@ export class Soloon implements IAstralObject {
   column: number
   row: number
   color: 'blue' | 'red' | 'white' | 'purple'
+  skippable: boolean
 
-  constructor (row: number, column: number, color: string) {
+  constructor(row: number, column: number, color: string) {
     this.kind = AstralObjectEnum.Soloon
     this.row = row
     this.column = column
     this.color = color.toLowerCase() as 'blue' | 'red' | 'white' | 'purple'
+    this.skippable = false
+  }
+
+  toJson(): any {
+    return {
+      row: this.row,
+      column: this.column,
+      color: this.color
+    }
   }
 }

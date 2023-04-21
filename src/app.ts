@@ -1,8 +1,11 @@
 import express from 'express'
 import { MegaverseRoutes } from './routes/megaverseRoutes'
-import megaverseController from './setup'
+import { MegaverseController } from './controllers/megaverseController'
+import megaverseConfig from './setup'
 
 const app = express()
+
+const megaverseController = new MegaverseController(megaverseConfig)
 
 app.use(express.json())
 

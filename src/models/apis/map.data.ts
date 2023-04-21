@@ -1,3 +1,3 @@
 export interface GoalMapData {
-  goal: string[][];
+  goal: string[][]
 }

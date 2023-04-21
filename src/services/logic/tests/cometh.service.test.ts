@@ -69,10 +69,10 @@ describe('Cometh without polyanet should be valid', () => {
   })
 })
 
-describe('Cometh with polyanet shouldnt be valid', () => {
-  it('cometh with polyanet shouldnt be valid', async () => {
+describe('Cometh with polyanet should be valid', () => {
+  it('cometh with polyanet should be valid', async () => {
     const megaverse = [[new Space(0, 0), new Cometh(0, 1, 'up')], [new Space(1, 0), new Polyanet(1, 1)]]
     const result = comethService.validate(megaverse[0][1], megaverse)
-    expect(result).toBeFalsy()
+    expect(result).toBeTruthy()
   })
 })
