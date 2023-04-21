@@ -44,6 +44,7 @@ export class MegaverseService {
   async process(rowMegaverse: string[][]) {
     const curedMegaverse = this.parse(rowMegaverse)
     this.validate(curedMegaverse)
+
     // step to save the megaverse
   }
 }

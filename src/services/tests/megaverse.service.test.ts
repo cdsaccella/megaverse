@@ -1,9 +1,9 @@
-import { AstralObjectEnum } from "../../enums/astralobject.enum"
-import { Polyanet } from "../../models/polyanet"
-import { Space } from "../../models/space"
-import { MegaverseService } from "../megaverse.service"
-import { PolyanetService } from "../polyanet.service"
-import { SpaceService } from "../space.service"
+import { AstralObjectEnum } from '../../enums/astralobject.enum'
+import { Polyanet } from '../../models/polyanet'
+import { Space } from '../../models/space'
+import { MegaverseService } from '../megaverse.service'
+import { PolyanetService } from '../polyanet.service'
+import { SpaceService } from '../space.service'
 
 let megaverseService: MegaverseService
 
@@ -42,3 +42,9 @@ describe('Recognize Polyanet', () => {
   })
 })
 
+describe('Error if unrecognizable object', () => {
+  it('should throw error if unrecognizable object', async () => {
+    const megaverse = [['POLYANET', 'UFO'], ['POLYANET', 'POLYANET']]
+    expect(() => megaverseService.parse(megaverse)).toThrow()
+  })
+})
