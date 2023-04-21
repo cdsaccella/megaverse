@@ -1,4 +1,5 @@
 export enum AstralObjectEnum {
   Space = 'space',
-  Polyanet = 'polyanet'
+  Polyanet = 'polyanet',
+  Soloon = 'soloon'
 }
