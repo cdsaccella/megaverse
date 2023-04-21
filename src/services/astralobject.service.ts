@@ -7,5 +7,5 @@ export interface IAstralObjectService {
 
   parse: (row: number, column: number, value: string) => IAstralObject | undefined
 
-  validate: (astralObject: IAstralObject) => boolean
+  validate: (astralObject: IAstralObject, megaverse: IAstralObject[][]) => boolean
 }

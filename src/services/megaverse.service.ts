@@ -44,7 +44,7 @@ export class MegaverseService {
         if (manager == null) {
           throw new Error(`No manager for kind ${astralObject.kind}`)
         }
-        if (!manager.validate(astralObject)) {
+        if (!manager.validate(astralObject, curedMegaverse)) {
           throw new Error(`Invalid value '${astralObject.kind}' at row ${rowIndex} and column ${columnIndex}`)
         }
       })

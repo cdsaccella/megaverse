@@ -15,7 +15,7 @@ export class PolyanetService implements IAstralObjectService {
     return undefined
   }
 
-  validate (_: IAstralObject): boolean {
+  validate (_polyanet: IAstralObject, _megaverse: IAstralObject[][]): boolean {
     return true
   }
 }

@@ -1,8 +1,10 @@
 import { AstralObjectEnum } from '../../enums/astralobject.enum'
 import { Polyanet } from '../../models/polyanet'
+import { Soloon } from '../../models/soloon'
 import { Space } from '../../models/space'
 import { MegaverseService } from '../megaverse.service'
 import { PolyanetService } from '../polyanet.service'
+import { SoloonService } from '../soloon.service'
 import { SpaceService } from '../space.service'
 
 let megaverseService: MegaverseService
@@ -13,6 +15,7 @@ beforeAll(() => {
   }
   megaverseConfig.managers.set(AstralObjectEnum.Space, new SpaceService())
   megaverseConfig.managers.set(AstralObjectEnum.Polyanet, new PolyanetService())
+  megaverseConfig.managers.set(AstralObjectEnum.Soloon, new SoloonService())
   megaverseService = new MegaverseService(megaverseConfig)
 })
 
@@ -70,5 +73,20 @@ describe('Valid polyanet between spaces', () => {
     const megaverse = [[new Space(0, 0), new Polyanet(0, 1)], [new Space(1, 0), new Space(1, 1)]]
     const result = megaverseService.validate(megaverse)
     expect(result).toBeTruthy()
+  })
+})
+
+describe('Soloon with polyanet should be valid', () => {
+  it('soloon with polyanet should be valid', async () => {
+    const megaverse = [[new Space(0, 0), new Soloon(0, 1, 'red')], [new Space(1, 0), new Polyanet(1, 1)]]
+    const result = megaverseService.validate(megaverse)
+    expect(result).toBeTruthy()
+  })
+})
+
+describe('Soloon without polyanet shouldnt be valid', () => {
+  it('soloon without polyanet shouldnt be valid', async () => {
+    const megaverse = [[new Space(0, 0), new Soloon(0, 1, 'red')], [new Space(1, 0), new Space(1, 1)]]
+    expect(() => megaverseService.validate(megaverse)).toThrow()
   })
 })
