@@ -1,4 +1,4 @@
-import { Space } from '../../models/space'
+import { Space } from '../../../models/space'
 import { SpaceService } from '../space.service'
 
 let spaceService: SpaceService

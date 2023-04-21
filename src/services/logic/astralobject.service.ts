@@ -1,5 +1,5 @@
-import { AstralObjectEnum } from '../enums/astralobject.enum'
-import { IAstralObject } from '../models/astralobject.interface'
+import { AstralObjectEnum } from '../../enums/astralobject.enum'
+import { IAstralObject } from '../../models/astralobject.interface'
 
 export interface IAstralObjectService {
 

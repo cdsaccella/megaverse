@@ -1,13 +1,20 @@
-import { AstralObjectEnum } from '../enums/astralobject.enum'
-import { IAstralObject } from '../models/astralobject.interface'
+
+import { AstralObjectEnum } from '../../enums/astralobject.enum'
+import { IAstralObject } from '../../models/astralobject.interface'
+import { IMegaverseRepository } from '../../repositories/megaverseRepository'
 import { IAstralObjectService } from './astralobject.service'
 
 export interface MegaverseConfig {
   managers: Map<AstralObjectEnum, IAstralObjectService>
+  repository: IMegaverseRepository
 }
 
 export class MegaverseService {
   constructor (private readonly megaverseConfig: MegaverseConfig) { }
+
+  async getMap (mapId: string): Promise<string[][]> {
+    return await this.megaverseConfig.repository.get(mapId)
+  }
 
   parse (rowMegaverse: string[][]): IAstralObject[][] {
     const curedMegaverse: IAstralObject[][] = []
@@ -27,7 +34,7 @@ export class MegaverseService {
           })
 
         if (!validObject) {
-          throw new Error(`Invalid value '${value}' at row ${rowIndex} and column ${columnIndex}`)
+          throw new Error(`Invalid value '${value}' at row ${rowIndex} and column ${columnIndex} when parsing`)
         }
       })
 
@@ -45,17 +52,29 @@ export class MegaverseService {
           throw new Error(`No manager for kind ${astralObject.kind}`)
         }
         if (!manager.validate(astralObject, curedMegaverse)) {
-          throw new Error(`Invalid value '${astralObject.kind}' at row ${rowIndex} and column ${columnIndex}`)
+          throw new Error(`Invalid value '${astralObject.kind}' at row ${rowIndex} and column ${columnIndex} when validating`)
         }
       })
     })
     return true
   }
 
-  async process (rowMegaverse: string[][]): Promise<boolean> {
-    const curedMegaverse = this.parse(rowMegaverse)
+  async save (mapId: string, curedMegaverse: IAstralObject[][]): Promise<void> {
+    for (const row of curedMegaverse) {
+      for (const astralObject of row.filter((ao) => !ao.skippable)) {
+        await new Promise(resolve => {
+          setTimeout(resolve, 1000)
+        })
+        await this.megaverseConfig.repository.post(mapId, astralObject.kind.toLowerCase(), astralObject.toJson())
+      }
+    }
+  }
+
+  async process (mapId: string): Promise<boolean> {
+    const map = await this.getMap(mapId)
+    const curedMegaverse = this.parse(map)
     this.validate(curedMegaverse)
-    // step to save the megaverse
+    await this.save(mapId, curedMegaverse)
     return true
   }
 }

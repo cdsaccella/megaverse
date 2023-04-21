@@ -1,10 +1,11 @@
-import { AstralObjectEnum } from '../../enums/astralobject.enum'
-import { Cometh } from '../../models/cometh'
-import { Polyanet } from '../../models/polyanet'
-import { Soloon } from '../../models/soloon'
-import { Space } from '../../models/space'
+import { AstralObjectEnum } from '../../../enums/astralobject.enum'
+import { Cometh } from '../../../models/cometh'
+import { Polyanet } from '../../../models/polyanet'
+import { Soloon } from '../../../models/soloon'
+import { Space } from '../../../models/space'
+import { MegaverseTestRepository } from '../../../repositories/mock/megaverseTestRepository'
 import { ComethService } from '../cometh.service'
-import { MegaverseService } from '../megaverse.service'
+import { MegaverseConfig, MegaverseService } from '../megaverse.service'
 import { PolyanetService } from '../polyanet.service'
 import { SoloonService } from '../soloon.service'
 import { SpaceService } from '../space.service'
@@ -12,13 +13,17 @@ import { SpaceService } from '../space.service'
 let megaverseService: MegaverseService
 
 beforeAll(() => {
-  const megaverseConfig = {
-    managers: new Map()
+  const managers = new Map()
+  managers.set(AstralObjectEnum.Space, new SpaceService())
+  managers.set(AstralObjectEnum.Polyanet, new PolyanetService())
+  managers.set(AstralObjectEnum.Soloon, new SoloonService())
+  managers.set(AstralObjectEnum.Cometh, new ComethService())
+  const repository = new MegaverseTestRepository()
+
+  const megaverseConfig: MegaverseConfig = {
+    managers,
+    repository
   }
-  megaverseConfig.managers.set(AstralObjectEnum.Space, new SpaceService())
-  megaverseConfig.managers.set(AstralObjectEnum.Polyanet, new PolyanetService())
-  megaverseConfig.managers.set(AstralObjectEnum.Soloon, new SoloonService())
-  megaverseConfig.managers.set(AstralObjectEnum.Cometh, new ComethService())
   megaverseService = new MegaverseService(megaverseConfig)
 })
 
@@ -102,9 +107,10 @@ describe('Cometh without polyanet should be valid', () => {
   })
 })
 
-describe('Cometh with polyanet shouldnt be valid', () => {
-  it('cometh with polyanet shouldnt be valid', async () => {
+describe('Cometh with polyanet should be valid', () => {
+  it('cometh with polyanet should be valid', async () => {
     const megaverse = [[new Space(0, 0), new Cometh(0, 1, 'up')], [new Space(1, 0), new Polyanet(1, 1)]]
-    expect(() => megaverseService.validate(megaverse)).toThrow()
+    const result = megaverseService.validate(megaverse)
+    expect(result).toBeTruthy()
   })
 })

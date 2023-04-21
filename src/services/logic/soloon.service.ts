@@ -1,7 +1,7 @@
-import { AstralObjectEnum } from '../enums/astralobject.enum'
-import { IAstralObject } from '../models/astralobject.interface'
-import { Polyanet } from '../models/polyanet'
-import { Soloon } from '../models/soloon'
+import { AstralObjectEnum } from '../../enums/astralobject.enum'
+import { IAstralObject } from '../../models/astralobject.interface'
+import { Polyanet } from '../../models/polyanet'
+import { Soloon } from '../../models/soloon'
 import { IAstralObjectService } from './astralobject.service'
 import { getAdjacents } from './utils'
 

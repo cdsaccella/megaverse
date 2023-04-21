@@ -1,6 +1,6 @@
-import { AstralObjectEnum } from '../enums/astralobject.enum'
-import { IAstralObject } from '../models/astralobject.interface'
-import { Polyanet } from '../models/polyanet'
+import { AstralObjectEnum } from '../../enums/astralobject.enum'
+import { IAstralObject } from '../../models/astralobject.interface'
+import { Polyanet } from '../../models/polyanet'
 import { IAstralObjectService } from './astralobject.service'
 
 export class PolyanetService implements IAstralObjectService {

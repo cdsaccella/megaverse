@@ -1,6 +1,6 @@
-import { Polyanet } from '../../models/polyanet'
-import { Soloon } from '../../models/soloon'
-import { Space } from '../../models/space'
+import { Polyanet } from '../../../models/polyanet'
+import { Soloon } from '../../../models/soloon'
+import { Space } from '../../../models/space'
 import { SoloonService } from '../soloon.service'
 
 let soloonService: SoloonService

@@ -1,4 +1,4 @@
-import { Polyanet } from '../../models/polyanet'
+import { Polyanet } from '../../../models/polyanet'
 import { PolyanetService } from '../polyanet.service'
 
 let polyanetService: PolyanetService
