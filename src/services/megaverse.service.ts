@@ -37,8 +37,19 @@ export class MegaverseService {
     return curedMegaverse
   }
 
-  validate(_curedMegaverse: IAstralObject[][]) {
-    throw new Error('Method not implemented.')
+  validate(curedMegaverse: IAstralObject[][]) {
+    curedMegaverse.forEach((row, rowIndex) => {
+      row.forEach((astralObject, columnIndex) => {
+        const manager = this.megaverseConfig.managers.get(astralObject.kind);
+        if (!manager) {
+          throw new Error(`No manager for kind ${astralObject.kind}`);
+        }
+        if (!manager.validate(astralObject)) {
+          throw new Error(`Invalid value '${astralObject.kind}' at row ${rowIndex} and column ${columnIndex}`);
+        }
+      });
+    });
+    return true
   }
 
   async process(rowMegaverse: string[][]) {

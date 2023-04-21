@@ -48,3 +48,27 @@ describe('Error if unrecognizable object', () => {
     expect(() => megaverseService.parse(megaverse)).toThrow()
   })
 })
+
+describe('Valid all spaces', () => {
+  it('all spaces should be valid', async () => {
+    const megaverse = [[new Space(0, 0), new Space(0, 1)], [new Space(1, 0), new Space(1, 1)]]
+    const result = megaverseService.validate(megaverse)
+    expect(result).toBeTruthy()
+  })
+})
+
+describe('Valid all spaces', () => {
+  it('all spaces should be valid', async () => {
+    const megaverse = [[new Space(0, 0), new Space(0, 1)], [new Space(1, 0), new Space(1, 1)]]
+    const result = megaverseService.validate(megaverse)
+    expect(result).toBeTruthy()
+  })
+})
+
+describe('Valid polyanet between spaces', () => {
+  it('Polyanet should be valid between spaces', async () => {
+    const megaverse = [[new Space(0, 0), new Polyanet(0, 1)], [new Space(1, 0), new Space(1, 1)]]
+    const result = megaverseService.validate(megaverse)
+    expect(result).toBeTruthy()
+  })
+})
