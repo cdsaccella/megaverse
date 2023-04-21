@@ -7,7 +7,7 @@ export class Soloon implements IAstralObject {
   row: number
   color: string
 
-  constructor(row: number, column: number, color: string) {
+  constructor (row: number, column: number, color: string) {
     this.kind = AstralObjectEnum.Soloon
     this.row = row
     this.column = column

@@ -1,4 +1,6 @@
+import { Polyanet } from '../../models/polyanet'
 import { Soloon } from '../../models/soloon'
+import { Space } from '../../models/space'
 import { SoloonService } from '../soloon.service'
 
 let soloonService: SoloonService
@@ -56,5 +58,21 @@ describe('No parse Black Soloon', () => {
     const value = 'BLACK_SOLOON'
     const result = soloonService.parse(0, 0, value)
     expect(result).toBeUndefined()
+  })
+})
+
+describe('Soloon with polyanet should be valid', () => {
+  it('soloon with polyanet should be valid', async () => {
+    const megaverse = [[new Space(0, 0), new Soloon(0, 1, 'red')], [new Space(1, 0), new Polyanet(1, 1)]]
+    const result = soloonService.validate(megaverse[0][1], megaverse)
+    expect(result).toBeTruthy()
+  })
+})
+
+describe('Soloon without polyanet shouldnt be valid', () => {
+  it('soloon without polyanet shouldnt be valid', async () => {
+    const megaverse = [[new Space(0, 0), new Soloon(0, 1, 'red')], [new Space(1, 0), new Space(1, 1)]]
+    const result = soloonService.validate(megaverse[0][1], megaverse)
+    expect(result).toBeFalsy()
   })
 })
