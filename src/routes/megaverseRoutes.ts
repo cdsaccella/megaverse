@@ -5,11 +5,11 @@ export class MegaverseRoutes {
   apiRoutes: Router = express.Router()
   megaverseController: MegaverseController
 
-  constructor(megaverseController: MegaverseController) {
+  constructor (megaverseController: MegaverseController) {
     this.megaverseController = megaverseController
   }
 
-  getRoutes(): Router[] {
+  getRoutes (): Router[] {
     return [
       this.apiRoutes.post('/map', this.megaverseController.process.bind(this.megaverseController))
     ]

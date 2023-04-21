@@ -7,14 +7,14 @@ export class Space implements IAstralObject {
   row: number
   skippable: boolean
 
-  constructor(row: number, column: number) {
+  constructor (row: number, column: number) {
     this.kind = AstralObjectEnum.Space
     this.row = row
     this.column = column
     this.skippable = true
   }
 
-  toJson(): any {
+  toJson (): any {
     return {}
   }
 }

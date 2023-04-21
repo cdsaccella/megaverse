@@ -10,13 +10,13 @@ export interface MegaverseConfig {
 }
 
 export class MegaverseService {
-  constructor(private readonly megaverseConfig: MegaverseConfig) { }
+  constructor (private readonly megaverseConfig: MegaverseConfig) { }
 
-  async getMap(mapId: string): Promise<string[][]> {
+  async getMap (mapId: string): Promise<string[][]> {
     return await this.megaverseConfig.repository.get(mapId)
   }
 
-  parse(rowMegaverse: string[][]): IAstralObject[][] {
+  parse (rowMegaverse: string[][]): IAstralObject[][] {
     const curedMegaverse: IAstralObject[][] = []
 
     rowMegaverse.forEach((row, rowIndex) => {
@@ -44,7 +44,7 @@ export class MegaverseService {
     return curedMegaverse
   }
 
-  validate(curedMegaverse: IAstralObject[][]): boolean {
+  validate (curedMegaverse: IAstralObject[][]): boolean {
     curedMegaverse.forEach((row, rowIndex) => {
       row.forEach((astralObject, columnIndex) => {
         const manager = this.megaverseConfig.managers.get(astralObject.kind)
@@ -59,18 +59,18 @@ export class MegaverseService {
     return true
   }
 
-  async save(mapId: string, curedMegaverse: IAstralObject[][]): Promise<void> {
+  async save (mapId: string, curedMegaverse: IAstralObject[][]): Promise<void> {
     for (const row of curedMegaverse) {
-      for (const astralObject of row.filter((ao) => ao.skippable === false)) {
+      for (const astralObject of row.filter((ao) => !ao.skippable)) {
         await new Promise(resolve => {
-          setTimeout(resolve, 1000);
-        });
+          setTimeout(resolve, 1000)
+        })
         await this.megaverseConfig.repository.post(mapId, astralObject.kind.toLowerCase(), astralObject.toJson())
       }
     }
   }
 
-  async process(mapId: string): Promise<boolean> {
+  async process (mapId: string): Promise<boolean> {
     const map = await this.getMap(mapId)
     const curedMegaverse = this.parse(map)
     this.validate(curedMegaverse)

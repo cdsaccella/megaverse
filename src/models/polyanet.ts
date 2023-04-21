@@ -7,14 +7,14 @@ export class Polyanet implements IAstralObject {
   row: number
   skippable: boolean
 
-  constructor(row: number, column: number) {
+  constructor (row: number, column: number) {
     this.kind = AstralObjectEnum.Polyanet
     this.row = row
     this.column = column
     this.skippable = false
   }
 
-  toJson(): any {
+  toJson (): any {
     return {
       row: this.row,
       column: this.column

@@ -6,17 +6,17 @@ import { IAstralObjectService } from './astralobject.service'
 export class ComethService implements IAstralObjectService {
   DIRECTIONS = ['UP', 'DOWN', 'LEFT', 'RIGHT']
 
-  getKind(): AstralObjectEnum {
+  getKind (): AstralObjectEnum {
     return AstralObjectEnum.Cometh
   }
 
-  parse(row: number, column: number, value: string): IAstralObject | undefined {
+  parse (row: number, column: number, value: string): IAstralObject | undefined {
     const values = value.split('_')
     const direction = values[0]
     return values.length === 2 && this.DIRECTIONS.includes(direction) && values[1] === 'COMETH' ? new Cometh(row, column, direction) : undefined
   }
 
-  validate(_cometh: IAstralObject, _megaverse: IAstralObject[][]): boolean {
-    return true;
+  validate (_cometh: IAstralObject, _megaverse: IAstralObject[][]): boolean {
+    return true
   }
 }

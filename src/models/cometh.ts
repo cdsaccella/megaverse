@@ -8,7 +8,7 @@ export class Cometh implements IAstralObject {
   direction: 'up' | 'down' | 'left' | 'right'
   skippable: boolean
 
-  constructor(row: number, column: number, direction: string) {
+  constructor (row: number, column: number, direction: string) {
     this.kind = AstralObjectEnum.Cometh
     this.row = row
     this.column = column
@@ -16,7 +16,7 @@ export class Cometh implements IAstralObject {
     this.skippable = false
   }
 
-  toJson(): any {
+  toJson (): any {
     return {
       row: this.row,
       column: this.column,
