@@ -9,4 +9,4 @@ app.get('/hello', (_, res) => {
   res.send('how are you?')
 })
 
-export default app;
+export default app
