@@ -108,4 +108,3 @@ describe('Cometh with polyanet shouldnt be valid', () => {
     expect(() => megaverseService.validate(megaverse)).toThrow()
   })
 })
-
