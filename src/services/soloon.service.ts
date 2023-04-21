@@ -3,6 +3,7 @@ import { IAstralObject } from '../models/astralobject.interface'
 import { Polyanet } from '../models/polyanet'
 import { Soloon } from '../models/soloon'
 import { IAstralObjectService } from './astralobject.service'
+import { getAdjacents } from './utils'
 
 export class SoloonService implements IAstralObjectService {
   COLORS = ['BLUE', 'RED', 'PURPLE', 'WHITE']
@@ -18,16 +19,7 @@ export class SoloonService implements IAstralObjectService {
   }
 
   validate (soloon: IAstralObject, megaverse: IAstralObject[][]): boolean {
-    const { row, column } = soloon
-    for (let i = row - 1; i <= row + 1; i++) {
-      for (let j = column - 1; j <= column + 1; j++) {
-        if (i >= 0 && j >= 0 && i < megaverse.length && j < megaverse[i].length) {
-          if (megaverse[i][j] instanceof Polyanet) {
-            return true
-          }
-        }
-      }
-    }
-    return false
+    const adjacents = getAdjacents(megaverse, soloon.row, soloon.column)
+    return adjacents.some(adjacent => adjacent instanceof Polyanet)
   }
 }
