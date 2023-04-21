@@ -7,9 +7,9 @@ export interface MegaverseConfig {
 }
 
 export class MegaverseService {
-  constructor(private readonly megaverseConfig: MegaverseConfig) { }
+  constructor (private readonly megaverseConfig: MegaverseConfig) { }
 
-  parse(rowMegaverse: string[][]): IAstralObject[][] {
+  parse (rowMegaverse: string[][]): IAstralObject[][] {
     const curedMegaverse: IAstralObject[][] = []
 
     rowMegaverse.forEach((row, rowIndex) => {
@@ -37,25 +37,25 @@ export class MegaverseService {
     return curedMegaverse
   }
 
-  validate(curedMegaverse: IAstralObject[][]) {
+  validate (curedMegaverse: IAstralObject[][]): boolean {
     curedMegaverse.forEach((row, rowIndex) => {
       row.forEach((astralObject, columnIndex) => {
-        const manager = this.megaverseConfig.managers.get(astralObject.kind);
-        if (!manager) {
-          throw new Error(`No manager for kind ${astralObject.kind}`);
+        const manager = this.megaverseConfig.managers.get(astralObject.kind)
+        if (manager == null) {
+          throw new Error(`No manager for kind ${astralObject.kind}`)
         }
         if (!manager.validate(astralObject)) {
-          throw new Error(`Invalid value '${astralObject.kind}' at row ${rowIndex} and column ${columnIndex}`);
+          throw new Error(`Invalid value '${astralObject.kind}' at row ${rowIndex} and column ${columnIndex}`)
         }
-      });
-    });
+      })
+    })
     return true
   }
 
-  async process(rowMegaverse: string[][]) {
+  async process (rowMegaverse: string[][]): Promise<boolean> {
     const curedMegaverse = this.parse(rowMegaverse)
     this.validate(curedMegaverse)
-
     // step to save the megaverse
+    return true
   }
 }
