@@ -11,6 +11,6 @@ export class Soloon implements IAstralObject {
     this.kind = AstralObjectEnum.Soloon
     this.row = row
     this.column = column
-    this.color = color
+    this.color = color.toLowerCase()
   }
 }

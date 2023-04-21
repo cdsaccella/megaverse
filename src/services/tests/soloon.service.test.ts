@@ -13,6 +13,8 @@ describe('Parse Red Soloon', () => {
     const result = soloonService.parse(0, 0, value)
     expect(result).toBeDefined()
     expect(result instanceof Soloon).toBeTruthy()
+    const soloon = result as Soloon
+    expect(soloon.color).toBe('red')
   })
 })
 
@@ -22,6 +24,8 @@ describe('Parse Blue Soloon', () => {
     const result = soloonService.parse(0, 0, value)
     expect(result).toBeDefined()
     expect(result instanceof Soloon).toBeTruthy()
+    const soloon = result as Soloon
+    expect(soloon.color).toBe('blue')
   })
 })
 
@@ -31,6 +35,8 @@ describe('Parse Purple Soloon', () => {
     const result = soloonService.parse(0, 0, value)
     expect(result).toBeDefined()
     expect(result instanceof Soloon).toBeTruthy()
+    const soloon = result as Soloon
+    expect(soloon.color).toBe('purple')
   })
 })
 
@@ -40,6 +46,8 @@ describe('Parse White Soloon', () => {
     const result = soloonService.parse(0, 0, value)
     expect(result).toBeDefined()
     expect(result instanceof Soloon).toBeTruthy()
+    const soloon = result as Soloon
+    expect(soloon.color).toBe('white')
   })
 })
 
