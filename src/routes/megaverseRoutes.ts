@@ -1,4 +1,4 @@
-import express, { Router } from 'express'
+import express, { RequestHandler, Router } from 'express'
 import { MegaverseController } from '../controllers/megaverseController'
 
 export class MegaverseRoutes {
@@ -11,7 +11,9 @@ export class MegaverseRoutes {
 
   getRoutes (): Router[] {
     return [
-      this.apiRoutes.post('/map', this.megaverseController.process.bind(this.megaverseController))
+      this.apiRoutes.post('/map', (async (req, res) => {
+        await this.megaverseController.process(req, res)
+      }) as RequestHandler)
     ]
   }
 }
